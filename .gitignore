@@ -4,3 +4,4 @@ root/
 .vscode/
 __pycache__/
 uploads/
+db.sqlite3
