@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    volumes:
+      - .:/app/
+      - app_static:/app/root/
+      - app_static:/app/uploads/
+    image: backend_image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=rashid
+      - POSTGRES_PASSWORD=rashid
+      - POSTGRES_DB=openeduhub
+volumes:
+  postgres_data:
+  app_static:
+  app_media:
