@@ -15,8 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(r'', include('puput.urls')),
 ]
+
+if settings.DEBUG:
+    import os
+    from django.conf.urls.static import static
+    from django.views.generic.base import RedirectView
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    urlpatterns += staticfiles_urlpatterns() # tell gunicorn where static files are in dev mode
+    urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
+    urlpatterns += [
+        re_path(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'myapp/images/favicon.ico')),
+    ]

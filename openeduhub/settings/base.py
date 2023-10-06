@@ -41,7 +41,25 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.contrib.routable_page',
+    'wagtail',
 
+    'modelcluster',
+    'taggit',
+    "django_social_share",
+
+    'puput',
+    "wagtailmarkdown",
 ]
 
 LOCAL_APPS = [
@@ -59,6 +77,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Wagtail
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'openeduhub.urls'
@@ -136,3 +157,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User model
 AUTH_USER_MODEL = 'account.User'
+
+# Wagtail
+WAGTAIL_SITE_NAME = 'codewithrashid blog'
