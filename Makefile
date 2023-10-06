@@ -19,6 +19,9 @@ shell:
 install:
 	docker-compose $(docker_file) exec $(execute_flags) web pip install $(package)
 
+bash:
+	docker-compose $(docker_file) exec $(execute_flags) web bash
+
 start:
 	docker-compose $(docker_file) build
 	docker-compose $(docker_file) up --no-start
@@ -31,7 +34,7 @@ restart: stop start
 
 dropdb:
 	docker-compose $(docker_file) down
-	- docker volume rm openeduhub_postgres_data
+	- docker volume rm openeduhub-django_postgres_data
 
 prune:
 	docker system prune --force
